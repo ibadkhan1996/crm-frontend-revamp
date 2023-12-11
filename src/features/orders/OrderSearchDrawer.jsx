@@ -24,6 +24,7 @@ const OrderSearchDrawer = (props) => {
           <BrandsMultiSelect multiSelectProps={{ label: "brand", placeholder: upperFirst("select brands"), hidePickedOptions: true, value: orderSearchState.brand || [], onChange: (e) => dispatch(setBrands(e)) }} />
           <AccountManagersMultiSelect
             multiSelectProps={{ label: "account manager", placeholder: upperFirst("select account managers"), hidePickedOptions: true, value: orderSearchState.user || [], onChange: (e) => dispatch(setAccountManagers(e)) }}
+            {...(!!orderSearchState.brand && { queryObject: { brands: { $in: orderSearchState.brand } } })}
           />
           <OrderTypesMultiSelect multiSelectProps={{ label: "order type", placeholder: upperFirst("select order types"), hidePickedOptions: true, value: orderSearchState.orderType || [], onChange: (e) => dispatch(setOrderTypes(e)) }} />
           <PaymentTypesMultiSelect multiSelectProps={{ label: "payment type", placeholder: upperFirst("select payment types"), hidePickedOptions: true, value: orderSearchState.paymentType || [], onChange: (e) => dispatch(setPaymentTypes(e)) }} />

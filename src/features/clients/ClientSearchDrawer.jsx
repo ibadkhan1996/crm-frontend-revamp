@@ -24,6 +24,7 @@ const ClientSearchDrawer = (props) => {
           <BrandsMultiSelect multiSelectProps={{ label: "brand", placeholder: upperFirst("select brands"), hidePickedOptions: true, value: clientSearchState.brand || [], onChange: (e) => dispatch(setBrands(e)) }} />
           <AccountManagersMultiSelect
             multiSelectProps={{ label: "account manager", placeholder: upperFirst("select account managers"), hidePickedOptions: true, value: clientSearchState.user || [], onChange: (e) => dispatch(setAccountManagers(e)) }}
+            {...(!!clientSearchState.brand && { queryObject: { brands: { $in: clientSearchState.brand } } })}
           />
           <CategoriesMultiSelect multiSelectProps={{ label: "category", placeholder: upperFirst("select categories"), hidePickedOptions: true, value: clientSearchState.category || [], onChange: (e) => dispatch(setCategories(e)) }} />
           <ClientStatusMultiSelect multiSelectProps={{ label: "client status", placeholder: upperFirst("select client status"), hidePickedOptions: true, value: clientSearchState.status || [], onChange: (e) => dispatch(setClientStatus(e)) }} />
