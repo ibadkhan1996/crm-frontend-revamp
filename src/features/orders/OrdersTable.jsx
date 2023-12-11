@@ -1,23 +1,19 @@
 import { Group, Loader, Pagination, Select, Stack, Table, Text } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useGetOrdersWithPaginationQuery } from "src/api/order";
 import Placeholder from "src/components/Placeholder";
-import { selectOrderSearchQuery } from "src/redux/slice/orderSearchSlice";
 import OrdersTableRow from "./OrdersTableRow";
 
-const OrdersTable = () => {
+const OrdersTable = ({ query }) => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const orderSearchQuery = useSelector(selectOrderSearchQuery);
-
-  const orders = useGetOrdersWithPaginationQuery({ page, pageSize, query: orderSearchQuery });
+  const orders = useGetOrdersWithPaginationQuery({ page, pageSize, query });
 
   useEffect(() => {
     setPage(1);
-  }, [pageSize, orderSearchQuery]);
+  }, [pageSize, query]);
 
   if (orders.isLoading) return <Loader />;
 

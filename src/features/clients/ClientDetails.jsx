@@ -7,6 +7,7 @@ import Placeholder from "src/components/Placeholder";
 import { MANTINE_VARIANTS } from "src/constants/CLASS_NAMES";
 import { SERVER_URL } from "src/constants/SERVER_URL";
 import CommentBox from "src/features/comments/CommentBox";
+import OrdersTable from "src/features/orders/OrdersTable";
 import classes from "src/index.module.css";
 import capitalizeLetters from "src/utils/capitalizeLetters";
 import formatAmount from "src/utils/formatAmount";
@@ -16,7 +17,6 @@ import getAbbreviation from "src/utils/getAbbreviation";
 import clientWorthMethods from "src/utils/newClientWorthMethods";
 import DeleteClientButton from "./DeleteClientButton";
 import EditClientButton from "./EditClientButton";
-import OrdersTable from "src/features/orders/OrdersTable";
 
 const ClientWorth = ({ client }) => {
   if (client) {
@@ -315,7 +315,9 @@ const ClientDetails = () => {
               </Tabs.List>
             </Paper>
 
-            <Tabs.Panel value="orders">{<OrdersTable query={{ client: id }} />}</Tabs.Panel>
+            <Tabs.Panel value="orders">
+              <OrdersTable query={{ client: id }} />
+            </Tabs.Panel>
 
             <Tabs.Panel value="comments">
               <CommentBox documentId={id} documentReference="client" />

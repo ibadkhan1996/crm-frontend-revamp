@@ -1,8 +1,6 @@
 import { Avatar, Badge, Group, Loader, Paper, SimpleGrid, Text } from "@mantine/core";
 import { IconAnalyze, IconAnalyzeFilled, IconAnalyzeOff, IconCheck, IconX } from "@tabler/icons-react";
-import { useSelector } from "react-redux";
 import { useGetClientsSummaryByClientStatusQuery } from "src/api/client";
-import { selectClientSearchQuery } from "src/redux/slice/clientSearchSlice";
 import formatCurrency from "src/utils/formatCurrency";
 import formatNumber from "src/utils/formatNumber";
 import getAbbreviation from "src/utils/getAbbreviation";
@@ -17,10 +15,8 @@ const icons = {
   refunded: <IconX {...iconProps} />,
 };
 
-const ClientsSummaryByClientStatus = () => {
-  const clientSearchQuery = useSelector(selectClientSearchQuery);
-
-  const clientsSummary = useGetClientsSummaryByClientStatusQuery({ query: clientSearchQuery });
+const ClientsSummaryByClientStatus = ({ query }) => {
+  const clientsSummary = useGetClientsSummaryByClientStatusQuery({ query });
 
   if (clientsSummary.isLoading) return <Loader />;
 

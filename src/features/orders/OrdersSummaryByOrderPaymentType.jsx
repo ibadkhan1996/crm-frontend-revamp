@@ -1,18 +1,14 @@
 import { Avatar, Group, Loader, Paper, SimpleGrid, Text } from "@mantine/core";
 import { IconArrowDownLeft, IconArrowUpRight } from "@tabler/icons-react";
-import { useSelector } from "react-redux";
 import { useGetOrdersSummaryQuery } from "src/api/order";
-import { selectOrderSearchQuery } from "src/redux/slice/orderSearchSlice";
 import formatCurrency from "src/utils/formatCurrency";
 import formatNumber from "src/utils/formatNumber";
 
 const iconProps = { size: 26 };
 const icons = [<IconArrowDownLeft {...iconProps} />, <IconArrowUpRight {...iconProps} />, <IconArrowDownLeft {...iconProps} />];
 
-const OrdersSummaryByOrderPaymentType = () => {
-  const orderSearchQuery = useSelector(selectOrderSearchQuery);
-
-  const ordersSummary = useGetOrdersSummaryQuery({ query: orderSearchQuery });
+const OrdersSummaryByOrderPaymentType = ({ query }) => {
+  const ordersSummary = useGetOrdersSummaryQuery({ query });
 
   if (ordersSummary.isLoading) return <Loader />;
 

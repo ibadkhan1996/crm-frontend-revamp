@@ -1,23 +1,19 @@
 import { Group, Loader, Pagination, Select, Stack, Table, Text } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useGetClientsWithPaginationQuery } from "src/api/client";
 import Placeholder from "src/components/Placeholder";
-import { selectClientSearchQuery } from "src/redux/slice/clientSearchSlice";
 import ClientsTableRow from "./ClientsTableRow";
 
-const ClientsTable = () => {
+const ClientsTable = ({ query }) => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const clientSearchQuery = useSelector(selectClientSearchQuery);
-
-  const clients = useGetClientsWithPaginationQuery({ page, pageSize, query: clientSearchQuery });
+  const clients = useGetClientsWithPaginationQuery({ page, pageSize, query });
 
   useEffect(() => {
     setPage(1);
-  }, [pageSize, clientSearchQuery]);
+  }, [pageSize, query]);
 
   if (clients.isLoading) return <Loader />;
 
