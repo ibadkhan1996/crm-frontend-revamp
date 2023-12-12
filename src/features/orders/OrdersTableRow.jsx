@@ -8,6 +8,7 @@ import formatAmount from "src/utils/formatAmount";
 import formatDate from "src/utils/formatDate";
 import formatNumber from "src/utils/formatNumber";
 import getAbbreviation from "src/utils/getAbbreviation";
+import OrderServicesPopover from "../orderServices/OrderServicesPopover";
 import OrdersTableRowActions from "./OrdersTableRowActions";
 
 const OrdersTableRow = ({ order }) => {
@@ -81,7 +82,9 @@ const OrdersTableRow = ({ order }) => {
         </Stack>
       </Table.Td>
 
-      <Table.Td ta={"center"}>{truncate(order.services.join(", "), { length: 25 })}</Table.Td>
+      <Table.Td ta={"center"}>
+        <OrderServicesPopover services={order.services} />
+      </Table.Td>
 
       <Table.Td ta={"center"}>{formatDate(order.createdAt)}</Table.Td>
 
