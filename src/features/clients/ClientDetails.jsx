@@ -1,7 +1,7 @@
-import { ActionIcon, Avatar, Badge, Divider, Grid, Group, Loader, Paper, Popover, Stack, Tabs, Text, Tooltip } from "@mantine/core";
-import { IconActivityHeartbeat, IconArrowNarrowDown, IconArrowNarrowUp, IconAt, IconBolt, IconInfoCircle, IconNote, IconPhone, IconUser, IconX } from "@tabler/icons-react";
+import { ActionIcon, Avatar, Badge, Button, Divider, Grid, Group, Loader, Paper, Popover, Stack, Tabs, Text, Tooltip } from "@mantine/core";
+import { IconActivityHeartbeat, IconArrowNarrowDown, IconArrowNarrowUp, IconAt, IconBolt, IconInfoCircle, IconNote, IconPhone, IconPlus, IconUser, IconX } from "@tabler/icons-react";
 import { truncate } from "lodash";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetClientByIdQuery } from "src/api/client";
 import Placeholder from "src/components/Placeholder";
 import { MANTINE_VARIANTS } from "src/constants/CLASS_NAMES";
@@ -17,6 +17,8 @@ import getAbbreviation from "src/utils/getAbbreviation";
 import clientWorthMethods from "src/utils/newClientWorthMethods";
 import DeleteClientButton from "./DeleteClientButton";
 import EditClientButton from "./EditClientButton";
+
+const addIcon = <IconPlus size={18} />;
 
 const ClientWorth = ({ client }) => {
   if (client) {
@@ -134,6 +136,8 @@ const ClientWorth = ({ client }) => {
 
 const ClientDetails = () => {
   const { id } = useParams();
+
+  const canCreateOrder = true;
 
   const client = useGetClientByIdQuery(id);
 
@@ -316,7 +320,15 @@ const ClientDetails = () => {
             </Paper>
 
             <Tabs.Panel value="orders">
-              <OrdersTable query={{ client: id }} />
+              <Stack>
+                {canCreateOrder && (
+                  <Button component={Link} to={"/orders/new"} state={{ brand: client.data.brand._id, client: client.data._id }} rightSection={addIcon} ml={"auto"}>
+                    Add order
+                  </Button>
+                )}
+
+                <OrdersTable query={{ client: id }} />
+              </Stack>
             </Tabs.Panel>
 
             <Tabs.Panel value="comments">

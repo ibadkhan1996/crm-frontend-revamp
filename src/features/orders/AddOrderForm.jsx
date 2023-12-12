@@ -1,22 +1,23 @@
 import { Button, Grid, Group, NumberInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCreateOrderMutation } from "src/api/order";
-import capitalizeLetters from "src/utils/capitalizeLetters";
 import BrandsSelect from "src/features/brands/BrandsSelect";
 import ClientsByBrandSelect from "src/features/clients/ClientsByBrandSelect";
 import OrderServicesTagsInput from "src/features/orderServices/OrdersServicesTagsInput";
 import OrderTypesSelect from "src/features/orderTypes/OrderTypesSelect";
 import PaymentGatewaysSelect from "src/features/paymentGateways/PaymentGatewaysSelect";
 import PaymentTypesSelect from "src/features/paymentTypes/PaymentTypesSelect";
+import capitalizeLetters from "src/utils/capitalizeLetters";
 
 const AddOrderForm = () => {
   const createOrderMutation = useCreateOrderMutation();
 
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const form = useForm({ initialValues: { paymentType: "", brand: "", client: "", salesEmail: "", amount: 0, orderType: "", paymentGateway: "", services: [] } });
+  const form = useForm({ initialValues: { paymentType: "", brand: location.state?.brand || "", client: location.state?.client || "", salesEmail: "", amount: 0, orderType: "", paymentGateway: "", services: [] } });
 
   useEffect(() => {
     if (form.isDirty("brand")) {
