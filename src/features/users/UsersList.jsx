@@ -30,7 +30,7 @@ const UsersList = ({ users = [] }) => {
                     {user.name}
                   </Text>
                   <Text size="xs" c={"dimmed"}>
-                    {truncate(user.email, 20)}
+                    {truncate(user.email, { length: 25 })}
                   </Text>
                   <Badge size="sm">{user.roleAndPermissions.title}</Badge>
                 </div>

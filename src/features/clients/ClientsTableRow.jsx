@@ -15,14 +15,14 @@ const ClientsTableRow = ({ client }) => {
     <Table.Tr key={client._id}>
       <Table.Td>
         <UnstyledButton component={Link} to={client._id}>
-          <Group wrap="nowrap" gap={"xs"}>
+          <Group wrap="nowrap" gap={"xs"} title={client.email}>
             <Avatar alt={client.title}>{getAbbreviation(client.title)}</Avatar>
             <div>
               <Text size="sm" fw={500} tt="capitalize">
                 {client.title}
               </Text>
               <Text size="xs" c={"dimmed"}>
-                {truncate(client.email, 20)}
+                {truncate(client.email, { length: 25 })}
               </Text>
             </div>
           </Group>
@@ -41,14 +41,14 @@ const ClientsTableRow = ({ client }) => {
       </Table.Td>
 
       <Table.Td>
-        <Group wrap="nowrap" gap={"xs"}>
+        <Group wrap="nowrap" gap={"xs"} title={client.user.email}>
           <Avatar alt={client.user.name}>{getAbbreviation(client.user.name)}</Avatar>
           <div>
             <Text size="sm" fw={500} tt="capitalize">
               {client.user.name}
             </Text>
             <Text size="xs" c={"dimmed"}>
-              {truncate(client.user.email, 20)}
+              {truncate(client.user.email, { length: 25 })}
             </Text>
           </div>
         </Group>

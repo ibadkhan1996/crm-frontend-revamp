@@ -37,6 +37,7 @@ const OrdersTable = ({ query }) => {
                 <Table.Th ta={"center"}>order type</Table.Th>
                 <Table.Th ta={"center"}>order stage</Table.Th>
                 <Table.Th ta={"center"}>order progress</Table.Th>
+                <Table.Th ta={"center"}>services</Table.Th>
                 <Table.Th ta={"center"}>created on</Table.Th>
                 <Table.Th ta={"center"}>actions</Table.Th>
               </Table.Tr>

@@ -13,7 +13,7 @@ const CommentPopover = ({ comment }) => {
     <Popover width={250} withArrow shadow="md" opened={commentPopoverOpened}>
       <Popover.Target>
         <Text size="sm" onMouseEnter={openCommentPopover} onMouseLeave={closeCommentPopover}>
-          {truncate(comment.comment, 10)}
+          {truncate(comment.comment, { length: 25 })}
         </Text>
       </Popover.Target>
 

@@ -20,14 +20,14 @@ const OrdersTableRow = ({ order }) => {
       </Table.Td>
 
       <Table.Td>
-        <Group wrap="nowrap" gap={"xs"}>
+        <Group wrap="nowrap" gap={"xs"} title={order.client.email}>
           <Avatar alt={order.client.title}>{getAbbreviation(order.client.title)}</Avatar>
           <div>
             <Text size="sm" fw={500} tt="capitalize">
               {order.client.title}
             </Text>
             <Text size="xs" c={"dimmed"}>
-              {truncate(order.client.email, 20)}
+              {truncate(order.client.email, { length: 25 })}
             </Text>
           </div>
         </Group>
@@ -45,14 +45,14 @@ const OrdersTableRow = ({ order }) => {
       </Table.Td>
 
       <Table.Td>
-        <Group wrap="nowrap" gap={"xs"}>
+        <Group wrap="nowrap" gap={"xs"} title={order.user.email}>
           <Avatar alt={order.user.name}>{getAbbreviation(order.user.name)}</Avatar>
           <div>
             <Text size="sm" fw={500} tt="capitalize">
               {order.user.name}
             </Text>
             <Text size="xs" c={"dimmed"}>
-              {truncate(order.user.email, 20)}
+              {truncate(order.user.email, { length: 25 })}
             </Text>
           </div>
         </Group>
@@ -80,6 +80,8 @@ const OrdersTableRow = ({ order }) => {
           <Progress h={5} w={100} color={MANTINE_VARIANTS[order.orderStage?.className || "default"]} value={formatNumber(order.orderStage?.percentage || 0)} />
         </Stack>
       </Table.Td>
+
+      <Table.Td ta={"center"}>{truncate(order.services.join(", "), { length: 25 })}</Table.Td>
 
       <Table.Td ta={"center"}>{formatDate(order.createdAt)}</Table.Td>
 
