@@ -6,6 +6,7 @@ import AddLead from "./features/leads/AddLead.jsx";
 import AddOrder from "./features/orders/AddOrder.jsx";
 import OrderDetails from "./features/orders/OrderDetails.jsx";
 import DashboardLayout from "./layouts/DashboardLayout.jsx";
+import Activities from "./pages/Activities.jsx";
 import AdminSettings from "./pages/AdminSettings.jsx";
 import Clients from "./pages/Clients.jsx";
 import Orders from "./pages/Orders.jsx";
@@ -30,6 +31,10 @@ const App = () => {
           <Route index element={<Orders />} />
           <Route path="new" element={<AddOrder />} />
           <Route path=":id" element={<OrderDetails />} />
+        </Route>
+
+        <Route path="activities">
+          <Route index element={<Activities />} />
         </Route>
 
         <Route path="admin-settings/*" element={<AdminSettings />} />
