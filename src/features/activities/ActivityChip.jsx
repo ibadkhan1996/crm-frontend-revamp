@@ -74,6 +74,12 @@ const ActivityChip = ({ activity }) => {
               </Link>
             </Badge>
           </Text>
+
+          {activity.activityUpdatedBy && (
+            <Text size="sm" my={4}>
+              {`${upperFirst(activity.activityStatus)} by: ${activity.activityUpdatedBy.email}`}
+            </Text>
+          )}
         </div>
 
         <ActivityChipActions activity={activity} />
