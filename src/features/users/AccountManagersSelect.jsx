@@ -1,10 +1,10 @@
 import { Skeleton } from "@mantine/core";
 import { upperFirst } from "@mantine/hooks";
-import { useGetAllAccountManagersQuery } from "src/api/user";
+import { useGetAccountManagersQuery } from "src/api/user";
 import Select from "src/components/Select";
 
 const AccountManagersSelect = ({ selectProps = {}, queryObject = {} }) => {
-  const accountManagers = useGetAllAccountManagersQuery(queryObject);
+  const accountManagers = useGetAccountManagersQuery(queryObject);
 
   if (accountManagers.isFetching) return <Skeleton height={36} />;
 

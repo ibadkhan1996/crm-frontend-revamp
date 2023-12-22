@@ -10,10 +10,10 @@ export const useGetAllUsersQuery = () => {
   });
 };
 
-export const useGetAllAccountManagersQuery = (params) => {
+export const useGetAccountManagersQuery = (params) => {
   return useQuery({
     queryKey: ["users", "account managers", params],
-    queryFn: () => api.get("users/managers", { params }).then(({ data }) => data),
+    queryFn: () => api.get("users/accountManagers", { params }).then(({ data }) => data),
   });
 };
 

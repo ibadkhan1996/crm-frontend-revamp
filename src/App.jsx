@@ -9,6 +9,7 @@ import DashboardLayout from "./layouts/DashboardLayout.jsx";
 import Activities from "./pages/Activities.jsx";
 import AdminSettings from "./pages/AdminSettings.jsx";
 import Clients from "./pages/Clients.jsx";
+import Leads from "./pages/Leads.jsx";
 import Orders from "./pages/Orders.jsx";
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
 
       <Route element={<DashboardLayout />}>
         <Route path="leads">
+          <Route index element={<Leads />} />
           <Route path="new" element={<AddLead />} />
         </Route>
 

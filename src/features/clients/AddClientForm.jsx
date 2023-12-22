@@ -29,22 +29,22 @@ const AddClientForm = () => {
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Grid grow align="flex-end">
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <BrandsSelect selectProps={{ required: true, label: "select brand", ...form.getInputProps("brand") }} />
         </Grid.Col>
-        <Grid.Col span={6}>
-          <AccountManagersSelect selectProps={{ required: true, label: "select manager", ...form.getInputProps("user") }} queryObject={form.values.brand && { brand: form.values.brand }} />
+        <Grid.Col span={{ base: 12, sm: 6 }}>
+          <AccountManagersSelect selectProps={{ required: true, label: "select manager", ...form.getInputProps("user") }} queryObject={form.values.brand && { brands: { $in: form.values.brand } }} />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <TextInput required label={capitalizeLetters("client name")} {...form.getInputProps("title")} />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <TextInput type="email" required label={capitalizeLetters("client email")} {...form.getInputProps("email")} />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <TextInput type="tel" required label={capitalizeLetters("client phone")} {...form.getInputProps("phone")} onChange={handlePhone} />
         </Grid.Col>
-        <Grid.Col span={12}>
+        <Grid.Col span={{ base: 12, md: 12 }}>
           <Textarea rows={4} label={capitalizeLetters("add notes (optional)")} {...form.getInputProps("notes")} />
         </Grid.Col>
       </Grid>

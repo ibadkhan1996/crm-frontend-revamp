@@ -33,7 +33,7 @@ const DateRangeInput = ({ range = {}, setRange = () => {}, ...props }) => {
     }
   }, [setRange]);
 
-  return <DatePickerInput type="range" value={dateRange} onChange={setDateRange} {...props} />;
+  return <DatePickerInput type="range" value={dateRange} onChange={setDateRange} allowSingleDateInRange {...props} />;
 };
 
 export default DateRangeInput;

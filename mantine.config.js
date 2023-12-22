@@ -11,6 +11,6 @@ export default {
     Modal: Modal.extend({ defaultProps: { overlayProps: { blur: 2 } } }),
     Badge: Badge.extend({ defaultProps: { variant: "light" } }),
     Loader: Loader.extend({ defaultProps: { type: "bars" } }),
-    Select: Select.extend({ defaultProps: { allowDeselect: false } }),
+    Select: Select.extend({ defaultProps: { allowDeselect: false, checkIconPosition: "right" } }),
   },
 };

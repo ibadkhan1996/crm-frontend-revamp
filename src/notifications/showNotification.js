@@ -5,7 +5,7 @@ export const showNotificaton = ({ title = "", message = "", type = "" }) => {
   return notifications.show({
     title,
     message,
-    // ...(type && { classNames: classes }),
+    ...(type && { classNames: classes }),
     ...(type && { color: type === "success" ? "teal" : "red" }),
   });
 };

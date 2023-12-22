@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { useCreateLeadMutation } from "src/api/lead";
 import Select from "src/components/Select";
 import TagsInput from "src/components/TagsInput";
-import capitalizeLetters from "src/utils/capitalizeLetters";
 import BrandsSelect from "src/features/brands/BrandsSelect";
 import LeadStatusSelect from "src/features/leadStatus/LeadStatusSelect";
+import capitalizeLetters from "src/utils/capitalizeLetters";
 
 const AddLeadForm = () => {
   const [countryCode, setCountryCode] = useState("");
@@ -24,23 +24,7 @@ const AddLeadForm = () => {
   const navigate = useNavigate();
 
   const form = useForm({
-    initialValues: {
-      title: "",
-      email: "",
-      phone: "",
-      country: "",
-      countryCode: "",
-      state: "",
-      city: "",
-      keywords: [],
-      notes: "",
-      company: "",
-      brand: "",
-      frontSeller: "",
-      user: "",
-      leadStatus: "",
-      leadStage: "",
-    },
+    initialValues: { title: "", email: "", phone: "", country: "", countryCode: "", state: "", city: "", keywords: [], notes: "", brand: "", frontSeller: "", ppcExecutive: "", leadStatus: "", leadStage: "" },
   });
 
   useEffect(() => {
@@ -71,25 +55,25 @@ const AddLeadForm = () => {
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Grid grow align="flex-end">
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <BrandsSelect selectProps={{ required: true, label: "select brand", ...form.getInputProps("brand") }} />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <p>ppc executive select</p>
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <p>front seller select</p>
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <TextInput required label={capitalizeLetters("name")} {...form.getInputProps("title")} />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <TextInput type="email" required label={capitalizeLetters("email")} {...form.getInputProps("email")} />
         </Grid.Col>
-        <Grid.Col span={4}>
-          <TextInput type="tel" required label={capitalizeLetters("client phone")} {...form.getInputProps("phone")} />
+        <Grid.Col span={{ base: 12, sm: 4 }}>
+          <TextInput type="tel" required label={capitalizeLetters("phone")} {...form.getInputProps("phone")} />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <Select
             required
             label={capitalizeLetters("select country")}
@@ -103,7 +87,7 @@ const AddLeadForm = () => {
             onChange={setCountryCode}
           />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <Select
             required
             label={capitalizeLetters("select state")}
@@ -117,7 +101,7 @@ const AddLeadForm = () => {
             onChange={setStateCode}
           />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, sm: 4 }}>
           <Select
             label={capitalizeLetters("select city (optional)")}
             data={cities}
@@ -129,13 +113,13 @@ const AddLeadForm = () => {
             {...form.getInputProps("city")}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <LeadStatusSelect selectProps={{ required: true, label: "select lead status", ...form.getInputProps("leadStatus") }} />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{ base: 12, sm: 6 }}>
           <TagsInput label={capitalizeLetters("add keywords (optional)")} placeholder={upperFirst("type a keyword and press [ENTER]")} {...form.getInputProps("keywords")} />
         </Grid.Col>
-        <Grid.Col span={12}>
+        <Grid.Col span={{ base: 12, sm: 12 }}>
           <Textarea label={capitalizeLetters("add notes (optional)")} rows={4} {...form.getInputProps("notes")} />
         </Grid.Col>
       </Grid>

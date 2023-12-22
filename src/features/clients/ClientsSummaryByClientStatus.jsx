@@ -22,7 +22,7 @@ const ClientsSummaryByClientStatus = ({ query }) => {
 
   if (clientsSummary.isSuccess && !!clientsSummary.data?.length) {
     return (
-      <SimpleGrid cols={3}>
+      <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
         {clientsSummary.data.map(
           (status, i) =>
             i !== 0 && (

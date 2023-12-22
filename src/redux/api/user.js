@@ -9,13 +9,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
-    getAllAccountManagers: builder.query({
+    getAccountManagers: builder.query({
       query: (query) => ({
-        url: "users/managers",
+        url: "users/accountManagers",
         method: "GET",
         params: query,
       }),
-      providesTags: [{ type: "users", id: "managers" }],
+      providesTags: [{ type: "users", id: "account managers" }],
     }),
     createUser: builder.mutation({
       query: (payload) => ({
@@ -28,4 +28,4 @@ export const userApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAllUsersQuery, useGetAllAccountManagersQuery, useCreateUserMutation } = userApiSlice;
+export const { useGetAllUsersQuery, useGetAccountManagersQuery, useCreateUserMutation } = userApiSlice;

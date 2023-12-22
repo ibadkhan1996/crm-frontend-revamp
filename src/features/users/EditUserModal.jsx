@@ -40,7 +40,7 @@ const EditUserModal = ({ isOpen = false, onClose = () => {}, user }) => {
             <TextInput required label="name" data-autofocus {...form.getInputProps("name")} />
             <TextInput required type="email" label="email" {...form.getInputProps("email")} />
             <PasswordInput label="password" placeholder="Type only for a new password" {...form.getInputProps("password")} />
-            <BrandsMultiSelect multiSelectProps={{ label: "brands", ...(form.values.brands.length === 0 && { required: true }), ...form.getInputProps("brands") }} queryObject={{ company: user.company._id }} />
+            <BrandsMultiSelect multiSelectProps={{ label: "brands", hidePickedOptions: true, ...(form.values.brands.length === 0 && { required: true }), ...form.getInputProps("brands") }} queryObject={{ company: user.company._id }} />
             <DepartmentsSelect selectProps={{ required: true, label: "department", ...form.getInputProps("department") }} />
             <RolesSelect selectProps={{ required: true, label: "role", ...form.getInputProps("roleAndPermissions") }} />
             <Switch label="is active" {...form.getInputProps("isActive", { type: "checkbox" })} />

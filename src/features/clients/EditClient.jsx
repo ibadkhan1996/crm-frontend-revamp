@@ -29,7 +29,7 @@ const EditClient = ({ isOpen = false, onClose = () => {}, compact = false, clien
   const compactFields = () => {
     return (
       <>
-        <AccountManagersSelect selectProps={{ label: "account manager", ...form.getInputProps("user") }} queryObject={{ brand: client.brand._id }} />
+        <AccountManagersSelect selectProps={{ label: "account manager", ...form.getInputProps("user") }} queryObject={{ brands: { $in: client.brand._id } }} />
         <ClientStatusSelect selectProps={{ label: "client status", ...form.getInputProps("status") }} />
         <ClientHealthSelect selectProps={{ label: "client health", ...form.getInputProps("health") }} />
       </>

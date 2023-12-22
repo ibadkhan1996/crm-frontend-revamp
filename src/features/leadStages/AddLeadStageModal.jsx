@@ -1,4 +1,4 @@
-import { Button, Modal, NumberInput, Stack, Switch, TextInput } from "@mantine/core";
+import { Button, Modal, NumberInput, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { upperFirst } from "@mantine/hooks";
 import { useCreateLeadStageMutation } from "src/api/leadStage";
@@ -28,7 +28,6 @@ const AddLeadStageModal = ({ isOpen = false, onClose = () => {} }) => {
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />
           <NumberInput required label="percentage" min={0} max={100} clampBehavior="strict" allowNegative={false} suffix="%" {...form.getInputProps("percentage")} />
           <Select required label="style" data={classNamesOptions} selectLabel="title" selectValue="value" searchable nothingFoundMessage={upperFirst("no results found")} {...form.getInputProps("className")} />
-          <Switch label="default lead stage" description="any other default will be replace with this" />
 
           <Button type="submit" mt="md" loading={createLeadStageMutation.isPending}>
             Create lead stage

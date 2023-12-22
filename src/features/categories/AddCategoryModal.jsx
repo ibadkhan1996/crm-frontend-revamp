@@ -9,7 +9,7 @@ const iconProps = { display: "block", size: 80, strokeWidth: 1.25 };
 const AddCategoryModal = ({ isOpen = false, onClose = () => {} }) => {
   const createCategoryMutation = useCreateCategoryMutation();
 
-  const form = useForm({ initialValues: { title: "", minValue: 0, maxValue: 0, default: false, file: null } });
+  const form = useForm({ initialValues: { title: "", minValue: 0, maxValue: 0, isDefault: false, file: null } });
 
   const iconPreview = () => {
     if (!!form.values.file) {
@@ -27,6 +27,7 @@ const AddCategoryModal = ({ isOpen = false, onClose = () => {} }) => {
     formData.append("title", values.title);
     formData.append("minValue", values.minValue);
     formData.append("maxValue", values.maxValue);
+    formData.append("isDefault", values.default);
     formData.append("file", values.file);
 
     createCategoryMutation.mutate(formData, {
@@ -54,7 +55,7 @@ const AddCategoryModal = ({ isOpen = false, onClose = () => {} }) => {
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />
           <NumberInput required label="minimum value" allowNegative={false} thousandSeparator prefix="$" {...form.getInputProps("minValue")} />
           <NumberInput required label="maximum value" allowNegative={false} thousandSeparator prefix="$" {...form.getInputProps("maxValue")} />
-          <Switch label="default client category" description="any other default will be replace with this" {...form.getInputProps("default", { type: "checkbox" })} />
+          <Switch label="default client category" description="any other default will be replace with this" {...form.getInputProps("isDefault", { type: "checkbox" })} />
 
           <Button type="submit" mt="md" loading={createCategoryMutation.isPending}>
             Create category

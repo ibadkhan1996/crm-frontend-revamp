@@ -11,6 +11,14 @@ export const useGetAllOrderServicesQuery = () => {
   });
 };
 
+export const useGetAllActiveOrderServicesQuery = () => {
+  return useQuery({
+    queryKey: ["orderServices", "active"],
+    queryFn: () => api.get("services/active").then(({ data }) => data),
+    staleTime: Infinity,
+  });
+};
+
 export const useCreateOrderServiceMutation = () => {
   const queryClient = useQueryClient();
 

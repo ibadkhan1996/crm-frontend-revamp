@@ -11,3 +11,7 @@ body {
 [data-mantine-color-scheme="dark"] body {
   background-color: #131416;
 }
+
+.mantine-Select-option[data-checked] svg {
+  color: var(--mantine-primary-color-filled);
+}

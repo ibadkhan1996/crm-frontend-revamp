@@ -10,6 +10,14 @@ export const useGetClientsWithPaginationQuery = (params) => {
   });
 };
 
+export const useGetClientsByAccountManagerQuery = (accountManagerId) => {
+  return useQuery({
+    queryKey: ["clients", "by account manager", accountManagerId],
+    queryFn: () => api.get(`clients/byAccountManager/${accountManagerId}`).then(({ data }) => data),
+    enabled: !!accountManagerId,
+  });
+};
+
 export const useGetClientsByBrandQuery = (brandId) => {
   return useQuery({
     queryKey: ["clients", "by brand", brandId],

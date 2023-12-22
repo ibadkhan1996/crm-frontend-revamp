@@ -10,7 +10,7 @@ const classNamesOptions = Object.values(CLASS_NAMES).map((name) => ({ title: nam
 const AddLeadStatusModal = ({ isOpen = false, onClose = () => {} }) => {
   const createLeadStatusMutation = useCreateLeadStatusMutation();
 
-  const form = useForm({ initialValues: { title: "", className: "" } });
+  const form = useForm({ initialValues: { title: "", className: "", isDefault: false } });
 
   const handleSubmit = (values) => {
     createLeadStatusMutation.mutate(values, {
@@ -27,7 +27,7 @@ const AddLeadStatusModal = ({ isOpen = false, onClose = () => {} }) => {
         <Stack>
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />
           <Select required label="style" data={classNamesOptions} selectLabel="title" selectValue="value" searchable nothingFoundMessage={upperFirst("no results found")} {...form.getInputProps("className")} />
-          <Switch label="default lead status" description="any other default will be replace with this" />
+          <Switch label="default lead status" description="any other default will be replaced with this" {...form.getInputProps("isDefault", { type: "checkbox" })} />
 
           <Button type="submit" mt="md" loading={createLeadStatusMutation.isPending}>
             Create lead status

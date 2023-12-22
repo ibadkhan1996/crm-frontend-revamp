@@ -1,4 +1,5 @@
-import { Badge, Group, Paper, SimpleGrid, Text } from "@mantine/core";
+import { Badge, Group, Paper, SimpleGrid, Tooltip } from "@mantine/core";
+import { IconChecks } from "@tabler/icons-react";
 import { MANTINE_VARIANTS } from "src/constants/CLASS_NAMES";
 import EditClientHealthModalButton from "./EditClientHealthModalButton";
 
@@ -9,12 +10,15 @@ const ClientHealthList = ({ clientHealth = [] }) => {
         return (
           <Paper key={health._id} p={"sm"} withBorder>
             <Group gap={"sm"}>
-              <div style={{ flex: 1 }}>
-                <Text fw={500} tt={"capitalize"}>
-                  {health.title}
-                </Text>
+              <Group gap={8} mr={"auto"}>
                 <Badge color={MANTINE_VARIANTS[health.className]}>{health.title}</Badge>
-              </div>
+
+                {health.isDefault && (
+                  <Tooltip label="Default client health" withArrow>
+                    <IconChecks size={18} />
+                  </Tooltip>
+                )}
+              </Group>
 
               <EditClientHealthModalButton clientHealth={health} />
             </Group>

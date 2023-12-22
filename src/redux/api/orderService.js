@@ -9,6 +9,13 @@ export const orderServiceApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ["orderServices"],
     }),
+    getAllActiveOrderServices: builder.query({
+      query: () => ({
+        url: "services/active",
+        method: "GET",
+      }),
+      providesTags: ["orderServices", "active"],
+    }),
     createOrderService: builder.mutation({
       query: (payload) => ({
         url: "services",
@@ -20,4 +27,4 @@ export const orderServiceApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAllOrderServicesQuery, useCreateOrderServiceMutation } = orderServiceApiSlice;
+export const { useGetAllOrderServicesQuery, useGetAllActiveOrderServicesQuery, useCreateOrderServiceMutation } = orderServiceApiSlice;

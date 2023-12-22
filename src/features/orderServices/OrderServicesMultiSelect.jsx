@@ -1,10 +1,10 @@
 import { Skeleton } from "@mantine/core";
 import { upperFirst } from "@mantine/hooks";
-import { useGetAllOrderServicesQuery } from "src/api/orderService";
+import { useGetAllActiveOrderServicesQuery } from "src/api/orderService";
 import MultiSelect from "src/components/MultiSelect";
 
 const OrderServicesMultiSelect = ({ multiSelectProps = {}, queryObject = {} }) => {
-  const orderServices = useGetAllOrderServicesQuery(queryObject);
+  const orderServices = useGetAllActiveOrderServicesQuery(queryObject);
 
   if (orderServices.isFetching) return <Skeleton height={36} />;
 

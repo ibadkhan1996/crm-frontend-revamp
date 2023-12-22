@@ -39,7 +39,7 @@ const AddUserModal = ({ isOpen = false, onClose = () => {} }) => {
   };
 
   const renderBrandsSelect = !!form.values.company && (
-    <BrandsMultiSelect multiSelectProps={{ label: "brands", ...(form.values.brands.length === 0 && { required: true }), ...form.getInputProps("brands") }} queryObject={{ company: form.values.company }} />
+    <BrandsMultiSelect multiSelectProps={{ label: "brands", hidePickedOptions: true, ...(form.values.brands.length === 0 && { required: true }), ...form.getInputProps("brands") }} queryObject={{ company: form.values.company }} />
   );
 
   return (

@@ -1,4 +1,5 @@
-import { Avatar, Group, Paper, SimpleGrid, Text } from "@mantine/core";
+import { Avatar, Group, Paper, SimpleGrid, Text, Tooltip } from "@mantine/core";
+import { IconChecks } from "@tabler/icons-react";
 import { SERVER_URL } from "src/constants/SERVER_URL";
 import formatCurrency from "src/utils/formatCurrency";
 import getAbbreviation from "src/utils/getAbbreviation";
@@ -19,9 +20,18 @@ const CategoriesList = ({ categories = [] }) => {
                 <Text fw={500} tt={"capitalize"}>
                   {category.title}
                 </Text>
-                <Text size="xs" c={"dimmed"}>
-                  {`${formatCurrency(category.minValue)} - ${formatCurrency(category.maxValue)}`}
-                </Text>
+
+                <Group gap={8}>
+                  <Text size="xs" c={"dimmed"}>
+                    {`${formatCurrency(category.minValue)} - ${formatCurrency(category.maxValue)}`}
+                  </Text>
+
+                  {category.isDefault && (
+                    <Tooltip label="Default client category" withArrow>
+                      <IconChecks size={18} />
+                    </Tooltip>
+                  )}
+                </Group>
               </div>
 
               <EditCategoryModalButton category={category} />

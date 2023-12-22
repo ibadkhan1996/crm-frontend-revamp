@@ -4,12 +4,12 @@ import { useForm } from "@mantine/form";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import { useUpdateOrderMutation } from "src/api/order";
-import ClientsByBrandSelect from "src/features/clients/ClientsByBrandSelect";
 import OrderServicesTagsInput from "src/features/orderServices/OrdersServicesTagsInput";
 import OrderStagesByOrderTypeSelect from "src/features/orderStages/OrderStagesByOrderTypeSelect";
 import OrderTypesSelect from "src/features/orderTypes/OrderTypesSelect";
 import PaymentGatewaysSelect from "src/features/paymentGateways/PaymentGatewaysSelect";
 import capitalizeLetters from "src/utils/capitalizeLetters";
+import ClientsByAccountManagerSelect from "../clients/ClientsByAccountManagerSelect";
 
 const EditOrder = ({ isOpen = false, onClose = () => {}, compact = false, order }) => {
   const updateOrderMutation = useUpdateOrderMutation();
@@ -61,7 +61,7 @@ const EditOrder = ({ isOpen = false, onClose = () => {}, compact = false, order 
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <div>
           <Stack>
-            <ClientsByBrandSelect selectProps={{ label: "client", selectLabel: "email", limit: 5, ...form.getInputProps("client") }} brandId={order.brand._id} />
+            <ClientsByAccountManagerSelect selectProps={{ label: "client", selectLabel: "email", limit: 5, ...form.getInputProps("client") }} accountManagerId={order.user._id} />
             <TextInput label={capitalizeLetters("sales person email")} {...form.getInputProps("salesEmail")} />
             {compactFields()}
             <NumberInput label={capitalizeLetters("order amount")} allowNegative={false} thousandSeparator prefix="$" {...form.getInputProps("amount")} />
