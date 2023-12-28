@@ -37,7 +37,7 @@ const AddCompanyModal = ({ isOpen = false, onClose = () => {} }) => {
   };
 
   return (
-    <Modal centered title={"create company"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"create company"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <Dropzone accept={IMAGE_MIME_TYPE} p={"xs"} w={"max-content"} mx={"auto"} multiple={false} onDrop={(files) => form.setFieldValue("file", files[0])}>

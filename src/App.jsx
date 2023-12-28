@@ -3,6 +3,7 @@ import Login from "./features/auth/Login.jsx";
 import AddClient from "./features/clients/AddClient.jsx";
 import ClientDetails from "./features/clients/ClientDetails.jsx";
 import AddLead from "./features/leads/AddLead.jsx";
+import LeadDetails from "./features/leads/LeadDetails.jsx";
 import AddOrder from "./features/orders/AddOrder.jsx";
 import OrderDetails from "./features/orders/OrderDetails.jsx";
 import DashboardLayout from "./layouts/DashboardLayout.jsx";
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="leads">
           <Route index element={<Leads />} />
           <Route path="new" element={<AddLead />} />
+          <Route path=":id" element={<LeadDetails />} />
         </Route>
 
         <Route path="clients">

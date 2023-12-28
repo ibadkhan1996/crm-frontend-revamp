@@ -12,7 +12,7 @@ const EditCommentModal = ({ isOpen = false, onClose = () => {}, comment }) => {
   };
 
   return (
-    <Modal centered title={"update comment"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update comment"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <Textarea rows={4} data-autofocus placeholder="Type a new comment..." {...form.getInputProps("comment")} />

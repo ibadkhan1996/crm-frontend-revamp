@@ -46,17 +46,21 @@ const OrdersTableRow = ({ order }) => {
       </Table.Td>
 
       <Table.Td>
-        <Group wrap="nowrap" gap={"xs"} title={order.user.email}>
-          <Avatar alt={order.user.name}>{getAbbreviation(order.user.name)}</Avatar>
-          <div>
-            <Text size="sm" fw={500} tt="capitalize">
-              {order.user.name}
-            </Text>
-            <Text size="xs" c={"dimmed"}>
-              {truncate(order.user.email, { length: 25 })}
-            </Text>
-          </div>
-        </Group>
+        {order.user ? (
+          <Group wrap="nowrap" gap={"xs"} title={order.user.email}>
+            <Avatar alt={order.user.name}>{getAbbreviation(order.user.name)}</Avatar>
+            <div>
+              <Text size="sm" fw={500} tt="capitalize">
+                {order.user.name}
+              </Text>
+              <Text size="xs" c={"dimmed"}>
+                {truncate(order.user.email, { length: 25 })}
+              </Text>
+            </div>
+          </Group>
+        ) : (
+          <Badge color="gray">no manager assigned</Badge>
+        )}
       </Table.Td>
 
       <Table.Td ta={"center"} tt={"capitalize"}>
@@ -71,7 +75,7 @@ const OrdersTableRow = ({ order }) => {
 
       <Table.Td ta={"center"}>
         <Tooltip label={upperFirst(order.orderStage?.title || "no stage assigned yet")} withArrow>
-          <Badge color={MANTINE_VARIANTS[order.orderStage?.className || "default"]}>{truncate(order.orderStage?.title || "no stage assigned yet", { length: 35 })}</Badge>
+          <Badge color={MANTINE_VARIANTS[order.orderStage?.className || "default"]}>{truncate(order.orderStage?.title || "no stage assigned yet", { length: 25 })}</Badge>
         </Tooltip>
       </Table.Td>
 

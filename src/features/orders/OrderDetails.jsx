@@ -72,11 +72,17 @@ const OrderDetails = () => {
                 </Text>
 
                 <Group gap={"xs"}>
-                  {order.data.services.map((service, i) => (
+                  {!!order.data.services.length ? (
+                    order.data.services.map((service, i) => (
+                      <Badge key={i} size="sm">
+                        {service}
+                      </Badge>
+                    ))
+                  ) : (
                     <Badge key={i} size="sm">
-                      {service}
+                      No services
                     </Badge>
-                  ))}
+                  )}
                 </Group>
               </Stack>
             </Flex>
@@ -106,9 +112,13 @@ const OrderDetails = () => {
                   <Text size="xs" c={"dimmed"} fw={500}>
                     Account manager
                   </Text>
-                  <Text size="sm" fw={500} tt={"capitalize"}>
-                    {order.data.user.name}
-                  </Text>
+                  {order.data.user ? (
+                    <Text size="sm" fw={500} tt={"capitalize"}>
+                      {order.data.user.name}
+                    </Text>
+                  ) : (
+                    <Badge color="gray">no manager assigned</Badge>
+                  )}
                 </div>
               </Group>
 

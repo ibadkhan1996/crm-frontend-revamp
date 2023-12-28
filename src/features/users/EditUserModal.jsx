@@ -33,7 +33,7 @@ const EditUserModal = ({ isOpen = false, onClose = () => {}, user }) => {
   };
 
   return (
-    <Modal centered title={"update user"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update user"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <ScrollArea h={400}>
           <Stack>

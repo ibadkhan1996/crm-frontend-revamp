@@ -12,7 +12,7 @@ const EditDepartmentModal = ({ isOpen = false, onClose = () => {}, department })
   };
 
   return (
-    <Modal centered title={"update department"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update department"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />

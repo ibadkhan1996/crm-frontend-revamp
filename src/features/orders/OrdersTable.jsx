@@ -7,7 +7,7 @@ import OrdersTableRow from "./OrdersTableRow";
 
 const OrdersTable = ({ query }) => {
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState("10");
 
   const orders = useGetOrdersWithPaginationQuery({ page, pageSize, query });
 
@@ -24,9 +24,9 @@ const OrdersTable = ({ query }) => {
   if (orders.isSuccess && !!orders.data.length) {
     return (
       <Stack gap={"lg"}>
-        <Table.ScrollContainer h={600} minWidth={2350}>
-          <Table verticalSpacing="sm" withTableBorder>
-            <Table.Thead style={{ position: "sticky", top: -1, backgroundColor: "var(--mantine-color-body)", zIndex: 2 }}>
+        <Table.ScrollContainer {...(orders.data.data.length > 8 && { h: 600 })} minWidth={2350}>
+          <Table stickyHeader stickyHeaderOffset={-1} verticalSpacing="sm" withTableBorder>
+            <Table.Thead>
               <Table.Tr tt="capitalize">
                 <Table.Th>order ID</Table.Th>
                 <Table.Th>client</Table.Th>
@@ -53,7 +53,7 @@ const OrdersTable = ({ query }) => {
 
         <Group gap={8} justify="flex-end">
           <Text size="sm">Per page:</Text>
-          <Select data={[10, 20, 30, 50]} value={pageSize} onChange={setPageSize} w={75} checkIconPosition="right" />
+          <Select data={["10", "20", "30", "50"]} value={pageSize} onChange={setPageSize} w={75} checkIconPosition="right" />
           <Pagination total={Math.ceil(orders.data.length / pageSize)} value={page} onChange={setPage} ml={"md"} />
         </Group>
       </Stack>

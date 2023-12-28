@@ -18,7 +18,7 @@ const EditOrderStageModal = ({ isOpen = false, onClose = () => {}, orderStage })
   };
 
   return (
-    <Modal centered title={"update order stage"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update order stage"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />

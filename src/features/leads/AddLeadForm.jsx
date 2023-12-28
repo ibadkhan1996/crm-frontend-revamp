@@ -2,54 +2,63 @@ import { Button, Grid, Group, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { upperFirst } from "@mantine/hooks";
 import { City, Country, State } from "country-state-city";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateLeadMutation } from "src/api/lead";
 import Select from "src/components/Select";
 import TagsInput from "src/components/TagsInput";
 import BrandsSelect from "src/features/brands/BrandsSelect";
 import LeadStatusSelect from "src/features/leadStatus/LeadStatusSelect";
+import FrontSellersSelect from "src/features/users/FrontSellersSelect";
 import capitalizeLetters from "src/utils/capitalizeLetters";
+import PpcExecutivesSelect from "../users/PpcExecutivesSelect";
 
 const AddLeadForm = () => {
-  const [countryCode, setCountryCode] = useState("");
-  const [stateCode, setStateCode] = useState("");
-
-  const countries = Country.getAllCountries();
-  const states = State.getStatesOfCountry(countryCode);
-  const cities = City.getCitiesOfState(countryCode, stateCode);
-
   const createLeadMutation = useCreateLeadMutation();
 
   const navigate = useNavigate();
 
   const form = useForm({
-    initialValues: { title: "", email: "", phone: "", country: "", countryCode: "", state: "", city: "", keywords: [], notes: "", brand: "", frontSeller: "", ppcExecutive: "", leadStatus: "", leadStage: "" },
+    initialValues: {
+      title: "",
+      email: "",
+      phone: "",
+      country: "",
+      countryCode: "",
+      state: "",
+      stateCode: "",
+      city: "",
+      keywords: [],
+      notes: "",
+      brand: "",
+      frontSeller: undefined,
+      ppcExecutive: undefined,
+      leadStatus: undefined,
+      leadStage: undefined,
+    },
+    transformValues: (values) => ({
+      ...values,
+      city: values.city || "",
+    }),
   });
 
-  useEffect(() => {
-    if (countryCode) {
-      form.setFieldValue("countryCode", countryCode);
+  const countries = Country.getAllCountries();
+  const states = State.getStatesOfCountry(form.values.countryCode);
+  const cities = City.getCitiesOfState(form.values.countryCode, form.values.stateCode);
 
-      const country = Country.getCountryByCode(countryCode);
-      form.setFieldValue("country", country.name);
-    }
+  const handleCountry = (countryCode) => {
+    const country = Country.getCountryByCode(countryCode);
 
-    setStateCode(null);
-    form.setFieldValue("city", null);
-  }, [countryCode]);
+    form.setValues({ country: country.name, countryCode: country.isoCode, state: null, stateCode: null, city: null });
+  };
 
-  useEffect(() => {
-    if (stateCode) {
-      const state = State.getStateByCodeAndCountry(stateCode, countryCode);
-      form.setFieldValue("state", state.name);
-    }
+  const handleState = (stateCode) => {
+    const state = State.getStateByCodeAndCountry(stateCode, form.values.countryCode);
 
-    form.setFieldValue("city", null);
-  }, [stateCode]);
+    form.setValues({ state: state.name, stateCode: state.isoCode, city: null });
+  };
 
   const handleSubmit = (values) => {
-    createLeadMutation.mutate(values);
+    createLeadMutation.mutate(values, { onSuccess: ({ data }) => navigate(`/leads/${data._id}`) });
   };
 
   return (
@@ -59,10 +68,10 @@ const AddLeadForm = () => {
           <BrandsSelect selectProps={{ required: true, label: "select brand", ...form.getInputProps("brand") }} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 4 }}>
-          <p>ppc executive select</p>
+          <PpcExecutivesSelect selectProps={{ required: true, label: "select ppc executive", ...form.getInputProps("ppcExecutive") }} queryObject={form.values.brand && { brands: { $in: form.values.brand } }} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 4 }}>
-          <p>front seller select</p>
+          <FrontSellersSelect selectProps={{ label: "select front seller", ...form.getInputProps("frontSeller") }} queryObject={form.values.brand && { brands: { $in: form.values.brand } }} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 4 }}>
           <TextInput required label={capitalizeLetters("name")} {...form.getInputProps("title")} />
@@ -83,8 +92,8 @@ const AddLeadForm = () => {
             limit={5}
             searchable
             nothingFoundMessage={upperFirst("no results found")}
-            value={countryCode}
-            onChange={setCountryCode}
+            {...form.getInputProps("countryCode")}
+            onChange={handleCountry}
           />
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 4 }}>
@@ -96,9 +105,9 @@ const AddLeadForm = () => {
             selectValue="isoCode"
             limit={5}
             searchable
-            nothingFoundMessage={upperFirst(!countryCode ? "select country first" : "no results found")}
-            value={stateCode}
-            onChange={setStateCode}
+            nothingFoundMessage={upperFirst(!form.values.countryCode ? "select country first" : "no results found")}
+            {...form.getInputProps("stateCode")}
+            onChange={handleState}
           />
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 4 }}>
@@ -109,12 +118,12 @@ const AddLeadForm = () => {
             selectValue="name"
             limit={5}
             searchable
-            nothingFoundMessage={upperFirst(!stateCode ? "select state first" : "no results found")}
+            nothingFoundMessage={upperFirst(!form.values.stateCode ? "select state first" : "no results found")}
             {...form.getInputProps("city")}
           />
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 6 }}>
-          <LeadStatusSelect selectProps={{ required: true, label: "select lead status", ...form.getInputProps("leadStatus") }} />
+          <LeadStatusSelect selectProps={{ label: "select lead status", ...form.getInputProps("leadStatus") }} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, sm: 6 }}>
           <TagsInput label={capitalizeLetters("add keywords (optional)")} placeholder={upperFirst("type a keyword and press [ENTER]")} {...form.getInputProps("keywords")} />

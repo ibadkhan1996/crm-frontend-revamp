@@ -12,7 +12,7 @@ const EditOrderServiceModal = ({ isOpen = false, onClose = () => {}, orderServic
   };
 
   return (
-    <Modal centered title={"update order service"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update order service"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />

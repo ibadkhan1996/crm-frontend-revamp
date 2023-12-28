@@ -19,7 +19,7 @@ const AddCommentModal = ({ isOpen = false, onClose = () => {}, documentId, docum
   };
 
   return (
-    <Modal centered title={"add comment"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"add comment"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <Textarea rows={4} data-autofocus placeholder="Type a new comment..." {...form.getInputProps("comment")} />

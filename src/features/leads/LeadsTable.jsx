@@ -1,49 +1,43 @@
 import { Group, Loader, Pagination, Select, Stack, Table, Text } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { useGetClientsWithPaginationQuery } from "src/api/client";
+import { useGetLeadsWithPaginationQuery } from "src/api/lead";
 import Placeholder from "src/components/Placeholder";
-import ClientsTableRow from "./ClientsTableRow";
+import LeadsTableRow from "./LeadsTableRow";
 
-const ClientsTable = ({ query }) => {
+const LeadsTable = ({ query }) => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState("10");
 
-  const clients = useGetClientsWithPaginationQuery({ page, pageSize, query });
+  const leads = useGetLeadsWithPaginationQuery({ page, pageSize, query });
 
   useEffect(() => {
     setPage(1);
   }, [pageSize, query]);
 
-  if (clients.isLoading) return <Loader />;
+  if (leads.isLoading) return <Loader />;
 
-  if (clients.isError) return <Placeholder title={"Error"} icon={<IconX size={50} />} />;
+  if (leads.isError) return <Placeholder title={"Error"} icon={<IconX size={50} />} />;
 
-  if (clients.isSuccess && !clients.data.length) return <Placeholder title={"No clients to display"} icon={<IconFiles size={50} />} />;
+  if (leads.isSuccess && !leads.data.length) return <Placeholder title={"No leads to display"} icon={<IconFiles size={50} />} />;
 
-  if (clients.isSuccess && !!clients.data.length) {
+  if (leads.isSuccess && !!leads.data.length) {
     return (
       <Stack gap={"lg"}>
-        <Table.ScrollContainer {...(clients.data.data.length > 8 && { h: 600 })} minWidth={2350}>
+        <Table.ScrollContainer {...(leads.data.data.length > 8 && { h: 600 })} minWidth={1900}>
           <Table stickyHeader stickyHeaderOffset={-1} verticalSpacing="sm" withTableBorder>
             <Table.Thead>
               <Table.Tr tt="capitalize">
-                <Table.Th>client</Table.Th>
+                <Table.Th>lead</Table.Th>
                 <Table.Th>brand</Table.Th>
-                <Table.Th>account manager</Table.Th>
-                <Table.Th ta={"center"}>client worth</Table.Th>
+                <Table.Th>ppc executive</Table.Th>
+                <Table.Th>front seller</Table.Th>
                 <Table.Th miw={125} ta={"center"}>
-                  client status
+                  lead status
                 </Table.Th>
                 <Table.Th miw={125} ta={"center"}>
-                  client health
+                  lead stage
                 </Table.Th>
-                <Table.Th miw={125} ta={"center"}>
-                  client category
-                </Table.Th>
-                <Table.Th ta={"center"}>partial refunds</Table.Th>
-                <Table.Th ta={"center"}>partial chargebacks</Table.Th>
-                <Table.Th ta={"center"}>no. of orders</Table.Th>
                 <Table.Th miw={150} ta={"center"}>
                   last comment
                 </Table.Th>
@@ -57,8 +51,8 @@ const ClientsTable = ({ query }) => {
             </Table.Thead>
 
             <Table.Tbody>
-              {clients.data.data.map((client) => (
-                <ClientsTableRow key={client._id} client={client} />
+              {leads.data.data.map((lead) => (
+                <LeadsTableRow key={lead._id} lead={lead} />
               ))}
             </Table.Tbody>
           </Table>
@@ -67,11 +61,11 @@ const ClientsTable = ({ query }) => {
         <Group gap={8} justify="flex-end">
           <Text size="sm">Per page:</Text>
           <Select data={["10", "20", "30", "50"]} value={pageSize} onChange={setPageSize} w={75} checkIconPosition="right" />
-          <Pagination total={Math.ceil(clients.data.length / pageSize)} value={page} onChange={setPage} ml={"md"} />
+          <Pagination total={Math.ceil(leads.data.length / pageSize)} value={page} onChange={setPage} ml={"md"} />
         </Group>
       </Stack>
     );
   }
 };
 
-export default ClientsTable;
+export default LeadsTable;

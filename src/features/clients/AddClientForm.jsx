@@ -3,9 +3,9 @@ import { useForm } from "@mantine/form";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateClientMutation } from "src/api/client";
-import capitalizeLetters from "src/utils/capitalizeLetters";
 import BrandsSelect from "src/features/brands/BrandsSelect";
 import AccountManagersSelect from "src/features/users/AccountManagersSelect";
+import capitalizeLetters from "src/utils/capitalizeLetters";
 
 const AddClientForm = () => {
   const createClientMutation = useCreateClientMutation();

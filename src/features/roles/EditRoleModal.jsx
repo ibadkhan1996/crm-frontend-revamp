@@ -55,7 +55,7 @@ const EditRoleModal = ({ isOpen = false, onClose = () => {}, role }) => {
   };
 
   return (
-    <Modal centered title={"update role"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update role"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />

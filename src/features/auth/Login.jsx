@@ -1,5 +1,6 @@
 import { Button, Grid, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
-import { useForm, yupResolver } from "@mantine/form";
+import { useForm } from "@mantine/form";
+import { yupResolver } from "mantine-form-yup-resolver";
 import { useFocusTrap } from "@mantine/hooks";
 import { IconAt, IconKey } from "@tabler/icons-react";
 import { useDispatch } from "react-redux";
@@ -53,9 +54,9 @@ const Login = () => {
   // };
 
   return (
-    <Grid>
+    <Grid gutter={0}>
       <Grid.Col span={{ base: 12, md: 6, lg: 4 }}>
-        <Paper style={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "center" }} p={"lg"}>
+        <Paper style={{ display: "flex", flexDirection: "column", minHeight: "100vh", justifyContent: "center" }} p={"lg"} radius={0}>
           <Stack gap={4} mb={"lg"}>
             <Title size={24}>Hi, Welcome to CRM Utility!</Title>
 

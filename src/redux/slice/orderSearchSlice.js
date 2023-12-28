@@ -11,10 +11,10 @@ const orderSearchSlice = createSlice({
       return { ...state, searchState: { ...state.searchState, _id: action.payload } };
     },
     setClientName: (state, action) => {
-      return { ...state, searchState: { ...state.searchState, title: action.payload.toLowerCase() } };
+      return { ...state, searchState: { ...state.searchState, clientTitle: action.payload.toLowerCase() } };
     },
     setClientEmail: (state, action) => {
-      return { ...state, searchState: { ...state.searchState, email: action.payload.toLowerCase() } };
+      return { ...state, searchState: { ...state.searchState, clientEmail: action.payload.toLowerCase() } };
     },
     setBrands: (state, action) => {
       return { ...state, searchState: { ...state.searchState, brand: action.payload } };

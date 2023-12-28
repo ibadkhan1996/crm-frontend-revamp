@@ -41,7 +41,7 @@ const EditBrandModal = ({ isOpen = false, onClose = () => {}, brand }) => {
   };
 
   return (
-    <Modal centered title={"update brand"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update brand"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <Dropzone accept={IMAGE_MIME_TYPE} p={"xs"} w={"max-content"} mx={"auto"} multiple={false} onDrop={(files) => form.setFieldValue("file", files[0])}>

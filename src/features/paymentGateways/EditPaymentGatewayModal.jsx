@@ -12,7 +12,7 @@ const EditPaymentGatewayModal = ({ isOpen = false, onClose = () => {}, paymentGa
   };
 
   return (
-    <Modal centered title={"update payment gateway"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update payment gateway"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />

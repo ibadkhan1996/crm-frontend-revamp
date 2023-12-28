@@ -1,4 +1,4 @@
-import { Button, Drawer, Modal, Stack, TextInput, Textarea } from "@mantine/core";
+import { Button, Drawer, Flex, Modal, Stack, TextInput, Textarea } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import dayjs from "dayjs";
@@ -15,7 +15,7 @@ const EditClient = ({ isOpen = false, onClose = () => {}, compact = false, clien
   const form = useForm({ initialValues: { title: "", email: "", phone: "", notes: "", user: "", status: "", health: "", createdAt: "" } });
 
   useEffect(() => {
-    form.setValues({ title: client.title, email: client.email, phone: client.phone, notes: client.notes, user: client.user._id, status: client.status._id, health: client.health._id, createdAt: new Date(client.createdAt.split("T")[0]) });
+    form.setValues({ title: client.title, email: client.email, phone: client.phone, notes: client.notes, user: client.user?._id, status: client.status._id, health: client.health._id, createdAt: new Date(client.createdAt.split("T")[0]) });
   }, [client]);
 
   const handlePhoneChange = (e) => form.setFieldValue("phone", e.target.value.replace(/[^0-9/]/g, ""));
@@ -37,7 +37,7 @@ const EditClient = ({ isOpen = false, onClose = () => {}, compact = false, clien
   };
 
   return compact ? (
-    <Modal centered title={"update client"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update client"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           {compactFields()}
@@ -49,25 +49,23 @@ const EditClient = ({ isOpen = false, onClose = () => {}, compact = false, clien
       </form>
     </Modal>
   ) : (
-    <Drawer title={"update client"} tt={"capitalize"} opened={isOpen} onClose={onClose} position="right">
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <div>
-          <Stack>
-            <TextInput label={capitalizeLetters("name")} {...form.getInputProps("title")} />
-            <TextInput label={capitalizeLetters("email")} {...form.getInputProps("email")} />
-            <TextInput type="tel" label={capitalizeLetters("phone")} {...form.getInputProps("phone")} onChange={handlePhoneChange} />
-            {compactFields()}
-            <DateInput label={capitalizeLetters("date")} {...form.getInputProps("createdAt")} />
-            <Textarea rows={4} label={capitalizeLetters("notes")} {...form.getInputProps("notes")} />
-          </Stack>
+    <Drawer title={"update client"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+      <Flex component="form" direction={"column"} h={"100%"} onSubmit={form.onSubmit(handleSubmit)}>
+        <Stack style={{ flex: 1 }}>
+          <TextInput label={capitalizeLetters("name")} {...form.getInputProps("title")} />
+          <TextInput label={capitalizeLetters("email")} {...form.getInputProps("email")} />
+          <TextInput type="tel" label={capitalizeLetters("phone")} {...form.getInputProps("phone")} onChange={handlePhoneChange} />
+          {compactFields()}
+          <Textarea rows={4} label={capitalizeLetters("notes")} {...form.getInputProps("notes")} />
+          <DateInput label={capitalizeLetters("date")} {...form.getInputProps("createdAt")} />
 
-          <div style={{ position: "sticky", bottom: 16, backgroundColor: "var(--mantine-color-body)", boxShadow: "0 16px 0 0 var(--mantine-color-body)", paddingTop: 16, zIndex: 2 }}>
-            <Button fullWidth type="submit" mt="md" loading={updateClientMutation.isPending}>
+          <div style={{ position: "sticky", bottom: 16, marginTop: "auto", backgroundColor: "var(--mantine-color-body)", boxShadow: "0 16px 0 0 var(--mantine-color-body)", zIndex: 2 }}>
+            <Button fullWidth type="submit" mt="lg" loading={updateClientMutation.isPending}>
               Update client
             </Button>
           </div>
-        </div>
-      </form>
+        </Stack>
+      </Flex>
     </Drawer>
   );
 };

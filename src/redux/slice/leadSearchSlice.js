@@ -19,6 +19,12 @@ const leadSearchSlice = createSlice({
     setBrands: (state, action) => {
       return { ...state, searchState: { ...state.searchState, brand: action.payload } };
     },
+    setPpcExecutives: (state, action) => {
+      return { ...state, searchState: { ...state.searchState, ppcExecutive: action.payload } };
+    },
+    setFrontSellers: (state, action) => {
+      return { ...state, searchState: { ...state.searchState, frontSeller: action.payload } };
+    },
     setLeadStatus: (state, action) => {
       return { ...state, searchState: { ...state.searchState, leadStatus: action.payload } };
     },
@@ -57,6 +63,6 @@ const leadSearchSlice = createSlice({
 export const selectLeadSearchState = (state) => state.leadSearch.searchState;
 export const selectLeadSearchQuery = (state) => state.leadSearch.searchQuery;
 
-export const { setSearchState, setLeadId, setName, setEmail, setBrands, setLeadStages, setLeadStatus, setDateRange, createSearchQuery, resetSearch } = leadSearchSlice.actions;
+export const { setSearchState, setLeadId, setName, setEmail, setBrands, setPpcExecutives, setFrontSellers, setLeadStages, setLeadStatus, setDateRange, createSearchQuery, resetSearch } = leadSearchSlice.actions;
 
 export default leadSearchSlice.reducer;

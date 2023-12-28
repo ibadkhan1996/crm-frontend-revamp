@@ -43,7 +43,7 @@ const AddUserModal = ({ isOpen = false, onClose = () => {} }) => {
   );
 
   return (
-    <Modal centered title={"create user"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"create user"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <ScrollArea h={400}>
           <Stack>

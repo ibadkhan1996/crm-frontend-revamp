@@ -36,7 +36,7 @@ const OrderSearchBar = () => {
         )}
 
         <form onSubmit={handleSearch} style={{ position: "relative" }}>
-          <TextInput placeholder="Search order by client email" miw={250} value={orderSearchState.email || ""} onChange={(e) => dispatch(setClientEmail(e.target.value))} />
+          <TextInput placeholder="Search order by client email" miw={250} value={orderSearchState.clientEmail || ""} onChange={(e) => dispatch(setClientEmail(e.target.value))} />
 
           <ActionIcon type="submit" style={{ position: "absolute", top: 4, right: 4 }}>
             {searchIcon}

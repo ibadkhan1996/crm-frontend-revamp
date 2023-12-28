@@ -39,7 +39,7 @@ const AddCategoryModal = ({ isOpen = false, onClose = () => {} }) => {
   };
 
   return (
-    <Modal centered title={"create category"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"create category"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <Dropzone accept={IMAGE_MIME_TYPE} p={"xs"} w={"max-content"} mx={"auto"} multiple={false} onDrop={(files) => form.setFieldValue("file", files[0])}>

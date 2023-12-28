@@ -22,7 +22,7 @@ const AddClientStatusModal = ({ isOpen = false, onClose = () => {} }) => {
   };
 
   return (
-    <Modal centered title={"create client status"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"create client status"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />

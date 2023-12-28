@@ -1,4 +1,4 @@
-import { Button, Drawer, Modal, NumberInput, Stack, TextInput } from "@mantine/core";
+import { Button, Drawer, Flex, Modal, NumberInput, Stack, TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import dayjs from "dayjs";
@@ -14,7 +14,7 @@ import ClientsByAccountManagerSelect from "../clients/ClientsByAccountManagerSel
 const EditOrder = ({ isOpen = false, onClose = () => {}, compact = false, order }) => {
   const updateOrderMutation = useUpdateOrderMutation();
 
-  const form = useForm({ initialValues: { client: "", salesEmail: "", orderType: "", orderStage: "", amount: "", paymentGateway: "", services: "", createdAt: "" } });
+  const form = useForm({ initialValues: { client: "", salesEmail: "", orderType: "", orderStage: "", amount: 0, paymentGateway: "", services: [], createdAt: "" } });
 
   useEffect(() => {
     form.setValues({
@@ -45,7 +45,7 @@ const EditOrder = ({ isOpen = false, onClose = () => {}, compact = false, order 
   };
 
   return compact ? (
-    <Modal centered title={"update order"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update order"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           {compactFields()}
@@ -57,26 +57,24 @@ const EditOrder = ({ isOpen = false, onClose = () => {}, compact = false, order 
       </form>
     </Modal>
   ) : (
-    <Drawer title={"update order"} tt={"capitalize"} opened={isOpen} onClose={onClose} position="right">
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <div>
-          <Stack>
-            <ClientsByAccountManagerSelect selectProps={{ label: "client", selectLabel: "email", limit: 5, ...form.getInputProps("client") }} accountManagerId={order.user._id} />
-            <TextInput label={capitalizeLetters("sales person email")} {...form.getInputProps("salesEmail")} />
-            {compactFields()}
-            <NumberInput label={capitalizeLetters("order amount")} allowNegative={false} thousandSeparator prefix="$" {...form.getInputProps("amount")} />
-            <PaymentGatewaysSelect selectProps={{ label: "payment gateway", ...form.getInputProps("paymentGateway") }} />
-            <OrderServicesTagsInput tagsInputProps={{ label: "services", ...form.getInputProps("services") }} />
-            <DateInput label={capitalizeLetters("date")} {...form.getInputProps("createdAt")} />
-          </Stack>
+    <Drawer title={"update order"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+      <Flex component="form" direction={"column"} h={"100%"} onSubmit={form.onSubmit(handleSubmit)}>
+        <Stack style={{ flex: 1 }}>
+          <ClientsByAccountManagerSelect selectProps={{ label: "client", selectLabel: "email", limit: 5, ...form.getInputProps("client") }} accountManagerId={order.user?._id} />
+          <TextInput label={capitalizeLetters("sales person email")} {...form.getInputProps("salesEmail")} />
+          {compactFields()}
+          <NumberInput label={capitalizeLetters("order amount")} allowNegative={false} thousandSeparator prefix="$" {...form.getInputProps("amount")} />
+          <PaymentGatewaysSelect selectProps={{ label: "payment gateway", ...form.getInputProps("paymentGateway") }} />
+          <OrderServicesTagsInput tagsInputProps={{ label: "services", ...form.getInputProps("services") }} />
+          <DateInput label={capitalizeLetters("date")} {...form.getInputProps("createdAt")} />
 
-          <div style={{ position: "sticky", bottom: 16, backgroundColor: "var(--mantine-color-body)", boxShadow: "0 16px 0 0 var(--mantine-color-body)", paddingTop: 16, zIndex: 2 }}>
-            <Button fullWidth type="submit" mt="md" loading={updateOrderMutation.isPending}>
+          <div style={{ position: "sticky", bottom: 16, marginTop: "auto", backgroundColor: "var(--mantine-color-body)", boxShadow: "0 16px 0 0 var(--mantine-color-body)", zIndex: 2 }}>
+            <Button fullWidth type="submit" mt="lg" loading={updateOrderMutation.isPending}>
               Update order
             </Button>
           </div>
-        </div>
-      </form>
+        </Stack>
+      </Flex>
     </Drawer>
   );
 };

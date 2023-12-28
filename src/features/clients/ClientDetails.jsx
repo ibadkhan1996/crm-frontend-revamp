@@ -209,9 +209,13 @@ const ClientDetails = () => {
                   <Text size="xs" c={"dimmed"} fw={500}>
                     Account manager
                   </Text>
-                  <Text size="sm" fw={500} tt={"capitalize"}>
-                    {client.data.user.name}
-                  </Text>
+                  {client.data.user ? (
+                    <Text size="sm" fw={500} tt={"capitalize"}>
+                      {client.data.user.name}
+                    </Text>
+                  ) : (
+                    <Badge color="gray">no manager assigned</Badge>
+                  )}
                 </div>
               </Group>
 
@@ -297,7 +301,7 @@ const ClientDetails = () => {
               <IconNote className={classes.icon} />
 
               <Text size="xs" c={"dimmed"} fw={500}>
-                Client's additional notes
+                Notes
               </Text>
             </Group>
 

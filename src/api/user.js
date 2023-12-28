@@ -17,6 +17,20 @@ export const useGetAccountManagersQuery = (params) => {
   });
 };
 
+export const useGetFrontSellersQuery = (params) => {
+  return useQuery({
+    queryKey: ["users", "front sellers", params],
+    queryFn: () => api.get("users/frontSellers", { params }).then(({ data }) => data),
+  });
+};
+
+export const useGetPpcExecutivesQuery = (params) => {
+  return useQuery({
+    queryKey: ["users", "ppc executive", params],
+    queryFn: () => api.get("users/ppcExecutives", { params }).then(({ data }) => data),
+  });
+};
+
 export const useCreateUserMutation = () => {
   const queryClient = useQueryClient();
 

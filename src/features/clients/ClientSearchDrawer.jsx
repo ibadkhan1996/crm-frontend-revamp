@@ -1,23 +1,29 @@
-import { Button, Drawer, Group, Stack, TextInput } from "@mantine/core";
+import { Button, Drawer, Flex, Grid, Stack, TextInput } from "@mantine/core";
 import { upperFirst } from "@mantine/hooks";
 import { useDispatch, useSelector } from "react-redux";
 import DateRangeInput from "src/components/DateRangeInput";
-import { createSearchQuery, resetSearch, selectClientSearchState, setAccountManagers, setBrands, setCategories, setClientEmail, setClientHealth, setClientId, setClientName, setClientStatus, setDateRange } from "src/redux/slice/clientSearchSlice";
 import BrandsMultiSelect from "src/features/brands/BrandsMultiSelect";
 import CategoriesMultiSelect from "src/features/categories/CategoriesMultiSelect";
 import ClientHealthMultiSelect from "src/features/clientHealth/ClientHealthMultiSelect";
 import ClientStatusMultiSelect from "src/features/clientStatus/ClientStatusMultiSelect";
 import AccountManagersMultiSelect from "src/features/users/AccountManagersMultiSelect";
+import { createSearchQuery, resetSearch, selectClientSearchState, setAccountManagers, setBrands, setCategories, setClientEmail, setClientHealth, setClientId, setClientName, setClientStatus, setDateRange } from "src/redux/slice/clientSearchSlice";
 
 const ClientSearchDrawer = (props) => {
   const clientSearchState = useSelector(selectClientSearchState);
 
   const dispatch = useDispatch();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(createSearchQuery());
+  };
+
   return (
-    <Drawer {...props} tt={"capitalize"} position="right">
-      <Stack align="space-between">
-        <Stack>
+    <Drawer {...props} tt={"capitalize"}>
+      <Flex component="form" direction={"column"} h={"100%"} onSubmit={handleSubmit}>
+        <Stack style={{ flex: 1 }}>
           <TextInput label="client ID" data-autofocus placeholder={upperFirst("enter client id")} tt={"capitalize"} value={clientSearchState._id || ""} onChange={(e) => dispatch(setClientId(e.target.value))} />
           <TextInput label="client name" placeholder={upperFirst("enter client name")} tt={"capitalize"} value={clientSearchState.title || ""} onChange={(e) => dispatch(setClientName(e.target.value))} />
           <TextInput type="email" label="client email" placeholder={upperFirst("enter client email")} tt={"capitalize"} value={clientSearchState.email || ""} onChange={(e) => dispatch(setClientEmail(e.target.value))} />
@@ -30,16 +36,28 @@ const ClientSearchDrawer = (props) => {
           <ClientStatusMultiSelect multiSelectProps={{ label: "client status", placeholder: upperFirst("select client status"), hidePickedOptions: true, value: clientSearchState.status || [], onChange: (e) => dispatch(setClientStatus(e)) }} />
           <ClientHealthMultiSelect multiSelectProps={{ label: "client health", placeholder: upperFirst("select client health"), hidePickedOptions: true, value: clientSearchState.health || [], onChange: (e) => dispatch(setClientHealth(e)) }} />
           <DateRangeInput label="date range" placeholder={upperFirst("select date range")} tt={"capitalize"} range={clientSearchState.createdAt} setRange={(e) => dispatch(setDateRange(e))} />
-        </Stack>
 
-        <Stack style={{ position: "sticky", bottom: 16, backgroundColor: "var(--mantine-color-body)", boxShadow: "0 16px 0 0 var(--mantine-color-body)", paddingTop: 16, zIndex: 2 }}>
-          <Group grow>
-            <Button onClick={() => dispatch(createSearchQuery())}>Search clients</Button>
-            <Button onClick={() => dispatch(resetSearch())}>Reset search</Button>
-          </Group>
-          <Button>Export clients</Button>
+          <div style={{ position: "sticky", bottom: 16, marginTop: "auto", backgroundColor: "var(--mantine-color-body)", boxShadow: "0 16px 0 0 var(--mantine-color-body)", zIndex: 2 }}>
+            <Grid grow mt={"lg"}>
+              <Grid.Col span={6}>
+                <Button type="submit" fullWidth>
+                  Search clients
+                </Button>
+              </Grid.Col>
+              <Grid.Col span={6}>
+                <Button type="button" fullWidth onClick={() => dispatch(resetSearch())}>
+                  Reset search
+                </Button>
+              </Grid.Col>
+              <Grid.Col>
+                <Button type="button" fullWidth>
+                  Export clients
+                </Button>
+              </Grid.Col>
+            </Grid>
+          </div>
         </Stack>
-      </Stack>
+      </Flex>
     </Drawer>
   );
 };

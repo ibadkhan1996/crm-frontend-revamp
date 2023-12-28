@@ -41,17 +41,21 @@ const ClientsTableRow = ({ client }) => {
       </Table.Td>
 
       <Table.Td>
-        <Group wrap="nowrap" gap={"xs"} title={client.user.email}>
-          <Avatar alt={client.user.name}>{getAbbreviation(client.user.name)}</Avatar>
-          <div>
-            <Text size="sm" fw={500} tt="capitalize">
-              {client.user.name}
-            </Text>
-            <Text size="xs" c={"dimmed"}>
-              {truncate(client.user.email, { length: 25 })}
-            </Text>
-          </div>
-        </Group>
+        {client.user ? (
+          <Group wrap="nowrap" gap={"xs"} title={client.user.email}>
+            <Avatar alt={client.user.name}>{getAbbreviation(client.user.name)}</Avatar>
+            <div>
+              <Text size="sm" fw={500} tt="capitalize">
+                {client.user.name}
+              </Text>
+              <Text size="xs" c={"dimmed"}>
+                {truncate(client.user.email, { length: 25 })}
+              </Text>
+            </div>
+          </Group>
+        ) : (
+          <Badge color="gray">no manager assigned</Badge>
+        )}
       </Table.Td>
 
       <Table.Td ta={"center"}>{formatAmount(clientWorthMethods(client).getClientWorth())}</Table.Td>

@@ -22,7 +22,7 @@ const EditClientStatusModal = ({ isOpen = false, onClose = () => {}, clientStatu
   };
 
   return (
-    <Modal centered title={"update client status"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
+    <Modal title={"update client status"} tt={"capitalize"} opened={isOpen} onClose={onClose}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           <TextInput required label="title" data-autofocus {...form.getInputProps("title")} />
