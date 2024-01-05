@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllDepartmentsQuery } from "src/api/department";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const Departments = () => {
   if (departments.isSuccess && !departments.data?.length) return <Placeholder title={"No departments to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddDepartmentModalButton />
+    <Stack gap={"xl"}>
+      <AddDepartmentModalButton />
 
-        <DepartmentsList departments={departments.data} />
-      </Stack>
-    </Paper>
+      <DepartmentsList departments={departments.data} />
+    </Stack>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllOrderStagesQuery } from "src/api/orderStage";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const OrderStages = () => {
   if (orderStages.isSuccess && !orderStages.data?.length) return <Placeholder title={"No order stages to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddOrderStageModalButton />
+    <Stack gap={"xl"}>
+      <AddOrderStageModalButton />
 
-        <OrderStagesList orderStages={orderStages.data} />
-      </Stack>
-    </Paper>
+      <OrderStagesList orderStages={orderStages.data} />
+    </Stack>
   );
 };
 

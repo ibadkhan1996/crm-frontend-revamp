@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllClientHealthQuery } from "src/api/clientHealth";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const ClientHealth = () => {
   if (clientHealth.isSuccess && !clientHealth.data?.length) return <Placeholder title={"No client health to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddClientHealthModalButton />
+    <Stack gap={"xl"}>
+      <AddClientHealthModalButton />
 
-        <ClientHealthList clientHealth={clientHealth.data} />
-      </Stack>
-    </Paper>
+      <ClientHealthList clientHealth={clientHealth.data} />
+    </Stack>
   );
 };
 

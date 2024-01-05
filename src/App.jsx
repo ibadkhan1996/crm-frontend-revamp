@@ -4,6 +4,7 @@ import AddClient from "./features/clients/AddClient.jsx";
 import ClientDetails from "./features/clients/ClientDetails.jsx";
 import AddLead from "./features/leads/AddLead.jsx";
 import LeadDetails from "./features/leads/LeadDetails.jsx";
+import NoteCategories from "./features/noteCategories/NoteCategories.jsx";
 import AddOrder from "./features/orders/AddOrder.jsx";
 import OrderDetails from "./features/orders/OrderDetails.jsx";
 import DashboardLayout from "./layouts/DashboardLayout.jsx";
@@ -39,6 +40,10 @@ const App = () => {
 
         <Route path="activities">
           <Route index element={<Activities />} />
+        </Route>
+
+        <Route path="notes">
+          <Route index element={<NoteCategories />} />
         </Route>
 
         <Route path="admin-settings/*" element={<AdminSettings />} />

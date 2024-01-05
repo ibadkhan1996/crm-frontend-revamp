@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllPaymentGatewaysQuery } from "src/api/paymentGateway";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const PaymentGateways = () => {
   if (paymentGateways.isSuccess && !paymentGateways.data?.length) return <Placeholder title={"No payment gateways to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddPaymentGatewayModalButton />
+    <Stack gap={"xl"}>
+      <AddPaymentGatewayModalButton />
 
-        <PaymentGatewaysList paymentGateways={paymentGateways.data} />
-      </Stack>
-    </Paper>
+      <PaymentGatewaysList paymentGateways={paymentGateways.data} />
+    </Stack>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllOrderTypesQuery } from "src/api/orderType";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const OrderTypes = () => {
   if (orderTypes.isSuccess && !orderTypes.data?.length) return <Placeholder title={"No order types to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddOrderTypeModalButton />
+    <Stack gap={"xl"}>
+      <AddOrderTypeModalButton />
 
-        <OrderTypesList orderTypes={orderTypes.data} />
-      </Stack>
-    </Paper>
+      <OrderTypesList orderTypes={orderTypes.data} />
+    </Stack>
   );
 };
 

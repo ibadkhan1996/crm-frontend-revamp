@@ -1,6 +1,6 @@
 import { ActionIcon } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconEdit } from "@tabler/icons-react";
+import { IconPencil } from "@tabler/icons-react";
 import EditPaymentTypeModal from "./EditPaymentTypeModal";
 
 const EditPaymentTypeModalButton = ({ paymentType }) => {
@@ -10,8 +10,8 @@ const EditPaymentTypeModalButton = ({ paymentType }) => {
     <>
       <EditPaymentTypeModal isOpen={editPaymentTypeModalOpened} onClose={closeEditPaymentTypeModal} paymentType={paymentType} />
 
-      <ActionIcon variant="subtle" size={"lg"} onClick={openEditPaymentTypeModal}>
-        <IconEdit strokeWidth={1.25} style={{ width: "70%", height: "70%" }} />
+      <ActionIcon variant="subtle" onClick={openEditPaymentTypeModal}>
+        <IconPencil size={18} />
       </ActionIcon>
     </>
   );

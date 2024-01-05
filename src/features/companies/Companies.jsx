@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllCompaniesQuery } from "src/api/company";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const Companies = () => {
   if (companies.isSuccess && !companies.data?.length) return <Placeholder title={"No companies to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddCompanyModalButton />
+    <Stack gap={"xl"}>
+      <AddCompanyModalButton />
 
-        <CompaniesList companies={companies.data} />
-      </Stack>
-    </Paper>
+      <CompaniesList companies={companies.data} />
+    </Stack>
   );
 };
 

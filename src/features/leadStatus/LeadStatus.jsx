@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllLeadStatusQuery } from "src/api/leadStatus";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const LeadStatus = () => {
   if (leadStatus.isSuccess && !leadStatus.data?.length) return <Placeholder title={"No lead status to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddLeadStatusModalButton />
+    <Stack gap={"xl"}>
+      <AddLeadStatusModalButton />
 
-        <LeadStatusList leadStatus={leadStatus.data} />
-      </Stack>
-    </Paper>
+      <LeadStatusList leadStatus={leadStatus.data} />
+    </Stack>
   );
 };
 

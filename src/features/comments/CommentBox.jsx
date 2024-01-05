@@ -8,12 +8,11 @@ import AddCommentForm from "./AddCommentForm";
 import Comment from "./Comment";
 
 const CommentBox = ({ documentId, documentReference }) => {
-  const scrollAreaRef = useRef(null);
-
-  const { ref, entry } = useIntersection({ root: scrollAreaRef.current, threshold: 1 });
-
   const comments = useGetCommentsWithPaginationInfiniteQuery({ query: { documentId } });
   const fetchMoreComments = () => comments.fetchNextPage();
+
+  const scrollAreaRef = useRef(null);
+  const { ref, entry } = useIntersection({ root: scrollAreaRef.current, threshold: 1 });
 
   useEffect(() => {
     if (entry?.isIntersecting) {

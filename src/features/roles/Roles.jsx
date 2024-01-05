@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllRolesQuery } from "src/api/role";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const Roles = () => {
   if (roles.isSuccess && !roles.data?.length) return <Placeholder title={"No roles to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddRoleModalButton />
+    <Stack gap={"xl"}>
+      <AddRoleModalButton />
 
-        <RolesList roles={roles.data} />
-      </Stack>
-    </Paper>
+      <RolesList roles={roles.data} />
+    </Stack>
   );
 };
 

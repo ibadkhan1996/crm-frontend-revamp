@@ -1,6 +1,6 @@
 import { ActionIcon } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconEdit } from "@tabler/icons-react";
+import { IconPencil } from "@tabler/icons-react";
 import EditLeadStageModal from "./EditLeadStageModal";
 
 const EditLeadStageModalButton = ({ leadStage }) => {
@@ -10,8 +10,8 @@ const EditLeadStageModalButton = ({ leadStage }) => {
     <>
       <EditLeadStageModal isOpen={editLeadStageModalOpened} onClose={closeEditLeadStageModal} leadStage={leadStage} />
 
-      <ActionIcon variant="subtle" size={"lg"} onClick={openEditLeadStageModal}>
-        <IconEdit strokeWidth={1.25} style={{ width: "70%", height: "70%" }} />
+      <ActionIcon variant="subtle" onClick={openEditLeadStageModal}>
+        <IconPencil size={18} />
       </ActionIcon>
     </>
   );

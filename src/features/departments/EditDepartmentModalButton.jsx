@@ -1,6 +1,6 @@
 import { ActionIcon } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconEdit } from "@tabler/icons-react";
+import { IconPencil } from "@tabler/icons-react";
 import EditDepartmentModal from "./EditDepartmentModal";
 
 const EditDepartmentModalButton = ({ department }) => {
@@ -10,8 +10,8 @@ const EditDepartmentModalButton = ({ department }) => {
     <>
       <EditDepartmentModal isOpen={editDepartmentModalOpened} onClose={closeEditDepartmentModal} department={department} />
 
-      <ActionIcon variant="subtle" size={"lg"} onClick={openEditDepartmentModal}>
-        <IconEdit strokeWidth={1.25} style={{ width: "70%", height: "70%" }} />
+      <ActionIcon variant="subtle" onClick={openEditDepartmentModal}>
+        <IconPencil size={18} />
       </ActionIcon>
     </>
   );

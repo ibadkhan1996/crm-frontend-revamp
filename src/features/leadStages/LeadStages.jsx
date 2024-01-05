@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { useGetAllLeadStagesQuery } from "src/api/leadStage";
 import AddLeadStageModalButton from "./AddLeadStageModalButton";
 import LeadStagesList from "./LeadStagesList";
@@ -13,13 +13,11 @@ const LeadStages = () => {
   if (leadStages.isSuccess && !leadStages.data?.length) return <Placeholder title={"No lead stages to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddLeadStageModalButton />
+    <Stack gap={"xl"}>
+      <AddLeadStageModalButton />
 
-        <LeadStagesList leadStages={leadStages.data} />
-      </Stack>
-    </Paper>
+      <LeadStagesList leadStages={leadStages.data} />
+    </Stack>
   );
 };
 

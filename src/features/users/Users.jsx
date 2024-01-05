@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllUsersQuery } from "src/api/user";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const Users = () => {
   if (users.isSuccess && !users.data?.length) return <Placeholder title={"No users to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddUserModalButton />
+    <Stack gap={"xl"}>
+      <AddUserModalButton />
 
-        <UsersList users={users.data} />
-      </Stack>
-    </Paper>
+      <UsersList users={users.data} />
+    </Stack>
   );
 };
 

@@ -1,23 +1,29 @@
-import { Avatar, Button, Group, Text, rem } from "@mantine/core";
+import { Button, Group, Text, ThemeIcon } from "@mantine/core";
 import { upperFirst } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 
 const AddButton = ({ title = "", subtitle = "", ...props }) => {
   return (
-    <Button variant="default" h={"auto"} p={"sm"} pr={"xl"} {...props}>
-      <Group gap={"sm"}>
-        <Avatar radius={"md"}>
-          <IconPlus style={{ width: rem(16), height: rem(16) }} />
-        </Avatar>
+    <Button variant="default" h={"auto"} p={"sm"} mih={"100%"} {...props}>
+      <Group gap={"sm"} ta={"left"}>
+        <ThemeIcon size={"lg"} radius={"md"}>
+          <IconPlus size={18} />
+        </ThemeIcon>
 
-        <div>
-          <Text fw={500} tt={"capitalize"}>
-            {title}
-          </Text>
-          <Text size="xs" c={"dimmed"} ta={"left"}>
-            {upperFirst(subtitle)}
-          </Text>
-        </div>
+        {(title || subtitle) && (
+          <div>
+            {title && (
+              <Text fw={500} tt={"capitalize"}>
+                {title}
+              </Text>
+            )}
+            {subtitle && (
+              <Text size="xs" c={"dimmed"}>
+                {upperFirst(subtitle)}
+              </Text>
+            )}
+          </div>
+        )}
       </Group>
     </Button>
   );

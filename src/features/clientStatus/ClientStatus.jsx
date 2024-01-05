@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllClientStatusQuery } from "src/api/clientStatus";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const ClientStatus = () => {
   if (clientStatus.isSuccess && !clientStatus.data?.length) return <Placeholder title={"No client status to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddClientStatusModalButton />
+    <Stack gap={"xl"}>
+      <AddClientStatusModalButton />
 
-        <ClientStatusList clientStatus={clientStatus.data} />
-      </Stack>
-    </Paper>
+      <ClientStatusList clientStatus={clientStatus.data} />
+    </Stack>
   );
 };
 

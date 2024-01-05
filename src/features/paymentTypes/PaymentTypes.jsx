@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllPaymentTypesQuery } from "src/api/paymentType";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const PaymentTypes = () => {
   if (paymentTypes.isSuccess && !paymentTypes.data?.length) return <Placeholder title={"No payment types to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddPaymentTypeModalButton />
+    <Stack gap={"xl"}>
+      <AddPaymentTypeModalButton />
 
-        <PaymentTypesList paymentTypes={paymentTypes.data} />
-      </Stack>
-    </Paper>
+      <PaymentTypesList paymentTypes={paymentTypes.data} />
+    </Stack>
   );
 };
 

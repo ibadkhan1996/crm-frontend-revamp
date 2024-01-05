@@ -1,4 +1,4 @@
-import { Loader, Paper, Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 import { IconFiles, IconX } from "@tabler/icons-react";
 import { useGetAllBrandsQuery } from "src/api/brand";
 import Placeholder from "src/components/Placeholder";
@@ -15,13 +15,11 @@ const Brands = () => {
   if (brands.isSuccess && !brands.data?.length) return <Placeholder title={"No brands to display"} icon={<IconFiles size={50} />} />;
 
   return (
-    <Paper withBorder p={"md"}>
-      <Stack gap={"xl"}>
-        <AddBrandModalButton />
+    <Stack gap={"xl"}>
+      <AddBrandModalButton />
 
-        <BrandsList brands={brands.data} />
-      </Stack>
-    </Paper>
+      <BrandsList brands={brands.data} />
+    </Stack>
   );
 };
 
